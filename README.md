@@ -35,7 +35,7 @@ no network requests and needs no root. Its helper is a single C++17 file using
 only the standard library; on first start `run.sh` compiles it with the
 system's `c++` (part of `base-devel`, which every Omarchy install has) into
 `~/.cache/omarchy-downloads-monitor/`, and rebuilds it after updates. The
-build takes a few seconds once; the running helper uses about 5 MB of memory.
+build takes a few seconds, once.
 
 ## Install
 
@@ -112,8 +112,7 @@ curl, wget, git, yt-dlp, pip/uv, npm, cargo, mise, Flatpak, pacman, yay и paru.
 Плагин ничего не отправляет в сеть и не требует прав root. Фоновая часть
 написана на C++ и при первом запуске сама собирается системным компилятором
 (он входит в `base-devel`, который есть в любой установке Omarchy). Сборка
-занимает несколько секунд один раз, а в работе программа занимает около 5 МБ
-памяти.
+занимает несколько секунд и нужна только один раз.
 
 Установка:
 
