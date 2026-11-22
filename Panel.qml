@@ -11,8 +11,8 @@ import "Model.js" as Model
 // and a popup listing each download with its progress.
 Panel {
   id: root
-  moduleName: "downloads.monitor"
-  ipcTarget: "downloads.monitor"
+  moduleName: "io.github.nydevel.downloads-monitor"
+  ipcTarget: "io.github.nydevel.downloads-monitor"
 
   readonly property string pluginDir: decodeURIComponent(String(Qt.resolvedUrl(".")).replace(/^file:\/\//, "")).replace(/\/$/, "")
   // Builds downloads.cpp on first use, then runs it.

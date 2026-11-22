@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "downloads.monitor",
+  "id": "io.github.nydevel.downloads-monitor",
   "name": "Downloads",
   "version": "0.1.0",
   "author": "Nikolay Yasinskiy",

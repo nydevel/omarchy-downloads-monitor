@@ -48,14 +48,23 @@ or manually:
 ```bash
 git clone https://github.com/nydevel/omarchy-downloads-monitor.git ~/.config/omarchy/plugins/downloads-monitor
 omarchy-shell shell rescanPlugins
-omarchy plugin enable downloads.monitor
+omarchy plugin enable io.github.nydevel.downloads-monitor
 ```
 
-Move it with `omarchy bar move downloads.monitor --section right --index 0`.
+Move it with `omarchy bar move io.github.nydevel.downloads-monitor --section right --index 0`.
+
+## Remove
+
+```bash
+omarchy plugin remove io.github.nydevel.downloads-monitor
+rm -rf ~/.cache/omarchy-downloads-monitor
+```
+
+The second line deletes the compiled helper; nothing else is left behind.
 
 ## Settings
 
-Set through the bar's widget settings, or `omarchy bar set downloads.monitor <key> <value>`:
+Set through the bar's widget settings, or `omarchy bar set io.github.nydevel.downloads-monitor <key> <value>`:
 
 | Key | Default | Meaning |
 |---|---|---|
@@ -118,4 +127,11 @@ curl, wget, git, yt-dlp, pip/uv, npm, cargo, mise, Flatpak, pacman, yay и paru.
 
 ```bash
 omarchy plugin add https://github.com/nydevel/omarchy-downloads-monitor.git --enable
+```
+
+Удаление:
+
+```bash
+omarchy plugin remove io.github.nydevel.downloads-monitor
+rm -rf ~/.cache/omarchy-downloads-monitor
 ```
