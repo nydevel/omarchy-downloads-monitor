@@ -31,7 +31,11 @@ after a download (unpacking) is shown as "Unpacking / writing to disk". When a
 download that was visible for a few seconds ends, you get a notification.
 
 Everything is read locally from `/proc` and the file system. The plugin makes
-no network requests, needs no root and uses only the Python standard library.
+no network requests and needs no root. Its helper is a single C++17 file using
+only the standard library; on first start `run.sh` compiles it with the
+system's `c++` (part of `base-devel`, which every Omarchy install has) into
+`~/.cache/omarchy-downloads-monitor/`, and rebuilds it after updates. The
+build takes a few seconds once; the running helper uses about 5 MB of memory.
 
 ## Install
 
@@ -73,15 +77,16 @@ Set through the bar's widget settings, or `omarchy bar set downloads.monitor <ke
 ## Development
 
 ```bash
-python3 downloads.py --once        # one snapshot
-python3 downloads.py               # live JSON lines
-python3 downloads.py --demo        # fake downloads for UI work
-python3 -m unittest discover -s tests
-node tests/test_model.mjs
+sh run.sh --once                   # build if needed, print one snapshot
+sh run.sh                          # live JSON lines
+sh run.sh --demo                   # fake downloads for UI work
+sh run.sh --self-test              # built-in unit checks
+tests/test_helper.sh               # helper against real processes (needs jq)
+node tests/test_model.mjs          # popup logic
 omarchy plugin validate .
 ```
 
-`downloads.py` prints one JSON object per line (`{"v":1,"rx":…,"jobs":[…],"finished":[…]}`);
+`downloads.cpp` prints one JSON object per line (`{"v":1,"rx":…,"jobs":[…],"finished":[…]}`);
 `Panel.qml` renders it, with all parsing and validation in `Model.js`.
 Translations live in `i18n/` (English and Russian so far; pull requests welcome).
 
@@ -104,8 +109,11 @@ curl, wget, git, yt-dlp, pip/uv, npm, cargo, mise, Flatpak, pacman, yay и paru.
 скачанный объём и скорость. Скорость pacman оценивается по общему сетевому
 трафику. Когда загрузка заканчивается, приходит уведомление.
 
-Плагин ничего не отправляет в сеть, не требует прав root и работает только
-на стандартной библиотеке Python.
+Плагин ничего не отправляет в сеть и не требует прав root. Фоновая часть
+написана на C++ и при первом запуске сама собирается системным компилятором
+(он входит в `base-devel`, который есть в любой установке Omarchy). Сборка
+занимает несколько секунд один раз, а в работе программа занимает около 5 МБ
+памяти.
 
 Установка:
 

@@ -15,7 +15,10 @@ Panel {
   ipcTarget: "downloads.monitor"
 
   readonly property string pluginDir: decodeURIComponent(String(Qt.resolvedUrl(".")).replace(/^file:\/\//, "")).replace(/\/$/, "")
-  readonly property string helperPath: pluginDir + "/downloads.py"
+  // Builds downloads.cpp on first use, then runs it.
+  readonly property string helperPath: pluginDir + "/run.sh"
+  property int quickExits: 0
+  property real startedAt: 0
 
   readonly property bool alwaysShow: setting("alwaysShow", false) === true
   readonly property bool showSpeed: setting("showSpeed", false) === true
@@ -66,19 +69,26 @@ Panel {
 
   Process {
     id: monitor
-    command: ["python3", "-I", root.helperPath, "--watch", root.extraProcesses]
+    command: ["sh", root.helperPath, "--watch", root.extraProcesses]
     running: true
+    // Process already has a C++ slot named onStarted, so track starts here.
+    onRunningChanged: if (running) root.startedAt = Date.now()
     stdout: SplitParser {
-      onRead: function(line) { root.applySnapshot(line) }
+      onRead: function(line) {
+        root.quickExits = 0
+        root.applySnapshot(line)
+      }
     }
     onExited: {
       root.jobs = []
+      // A helper that dies right away (e.g. no compiler) backs off to a
+      // minute instead of rebuilding every few seconds.
+      if (Date.now() - root.startedAt < 3000) root.quickExits++
+      respawn.interval = root.quickExits >= 3 ? 60000 : 5000
       respawn.restart()
     }
   }
 
-  // The helper exits only if it crashes or the shell restarts it; come back
-  // after a pause rather than spinning.
   Timer {
     id: respawn
     interval: 5000
