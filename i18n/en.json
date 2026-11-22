@@ -1,0 +1,20 @@
+{
+  "bar.idle": "No background downloads",
+  "bar.tooltip": { "one": "%1 download · %2", "other": "%1 downloads · %2" },
+  "panel.title": "Downloads",
+  "panel.idle": "Nothing downloading",
+  "panel.activeCount": { "one": "%1 active", "other": "%1 active" },
+  "panel.empty": "Nothing is downloading in the background right now. Package managers, game launchers, Proton, curl, git and similar tools show up here while they download.",
+  "panel.network": "All network traffic: %1",
+  "status.progress": "%1 of %2",
+  "status.eta": "about %1 left",
+  "status.downloaded": "%1 downloaded",
+  "status.files": { "one": "%1 file", "other": "%1 files" },
+  "status.estimated": "Speed estimated from network traffic",
+  "status.active": "Downloading",
+  "status.writing": "Unpacking / writing to disk",
+  "time.seconds": { "one": "%1 sec", "other": "%1 sec" },
+  "time.minutes": { "one": "%1 min", "other": "%1 min" },
+  "time.hours": { "one": "%1 h", "other": "%1 h" },
+  "notify.finished": "Download finished"
+}

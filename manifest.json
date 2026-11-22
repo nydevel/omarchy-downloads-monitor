@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "downloads.monitor",
+  "name": "Downloads",
+  "version": "0.1.0",
+  "author": "Nikolay Yasinskiy",
+  "license": "MIT",
+  "description": "Shows an animated arrow in the bar while anything downloads in the background, with a popup listing each download and its progress.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Downloads",
+    "description": "Background downloads from package managers, game launchers, Proton, curl, git and more.",
+    "category": "Network",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "alwaysShow": false,
+      "showSpeed": false,
+      "notifyOnFinish": true,
+      "extraProcesses": ""
+    },
+    "schema": [
+      {
+        "key": "alwaysShow",
+        "type": "boolean",
+        "label": "Always show",
+        "description": "Keep the icon in the bar even when nothing is downloading.",
+        "defaultValue": false
+      },
+      {
+        "key": "showSpeed",
+        "type": "boolean",
+        "label": "Show speed",
+        "description": "Show the current download speed next to the arrow.",
+        "defaultValue": false
+      },
+      {
+        "key": "notifyOnFinish",
+        "type": "boolean",
+        "label": "Notify when finished",
+        "description": "Send a notification when a background download finishes.",
+        "defaultValue": true
+      },
+      {
+        "key": "extraProcesses",
+        "type": "string",
+        "label": "Extra programs",
+        "description": "Comma-separated process names to watch in addition to the built-in list.",
+        "defaultValue": ""
+      }
+    ]
+  }
+}
